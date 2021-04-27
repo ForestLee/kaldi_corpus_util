@@ -35,6 +35,7 @@ EVERY_SPEAKER = 400  #默认每一个人400句话
 
 def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out_file_name_sentence, start, every):
     output_file_name_corpus_dict = {}
+    wav_list_files = []
     src_files = [os.path.join(dir_path, f)
                  for dir_path, _, files in os.walk(src_folder)
                  for f in files
@@ -59,8 +60,10 @@ def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out
             every_str = "{:0>4d}".format(every_index)
             dest_file = START_WITH + str(speaker_int_str) + "S" + every_str + ".wav"
             if platform.system() == 'Linux':
+                wav_list_files.append(speaker_dir + "/" + dest_file)
                 os.system("cp " + src_wav_file + " " + speaker_dir + "/" + dest_file)
             elif platform.system() == 'Windows':
+                wav_list_files.append(speaker_dir + "\\" + dest_file)
                 os.system("copy " + src_wav_file + " " + speaker_dir + "\\" + dest_file)
             else:
                 print("unknow OS")
@@ -77,8 +80,8 @@ def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out
             print(e)
 
     with open(out_file_list, 'w', encoding='utf-8') as write_file:
-        for key in output_file_name_corpus_dict:
-            write_file.write(key + "\n")
+        for file in wav_list_files:
+            write_file.write(file + "\n")
 
     with open(out_file_name_sentence, 'w', encoding='utf-8') as write_file:
         for key in output_file_name_corpus_dict:
@@ -86,7 +89,8 @@ def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out
             words_line = ""
             for seg in segments:
                 words_line += " " + seg.replace(" ", "")
-            write_file.write(key + words_line + "\n")
+            key_no_wav = key[0:-4]   #xxxx.wav --- xxxx
+            write_file.write(key_no_wav + words_line + "\n")
 
 def read_file_corpus(in_file_name_sentence):
     file_name_corpus = {}
