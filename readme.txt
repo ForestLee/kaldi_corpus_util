@@ -14,7 +14,7 @@ D:\work\asr\dataset\CN-NORM-SC-20191218-M-45-10007334.wav
 D:\work\asr\dataset\CN-NORM-YU-20191218-F-19-10040410.wav
 
 #####################################
-#        根据语料生成词典              #
+#        根据语料生成词典(aishell)     #
 #####################################
 generate_lexicon.py D:\work\asr\dataset\from_wangzhongping\20200827.csv
 生成lexicon.txt
@@ -44,6 +44,7 @@ T0055G0002S0001 以后 你 是 男孩子
 T0055G0002S0002 兰州 哪有 买路 虎 汽车 的
 T0055G0002S0004 看看 我 的 日程表
 ...
+
 
 change_file_name.py src_path dest_path 20200827.csv /tmp/wav_list.txt /tmp/aidatatang_200_zh_transcript.txt
 

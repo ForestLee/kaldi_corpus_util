@@ -27,9 +27,10 @@ change_file_name.py src_path dest_path 20200827.csv /tmp/wav_list.txt /tmp/aidat
 import sys
 import os
 import platform
+import jieba
 
 START_WITH = "T0055"
-START_FROM = 1000   #现有最大 + 1
+START_FROM = 9000   #现有最大 + 1
 EVERY_SPEAKER = 400  #默认每一个人400句话
 
 def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out_file_name_sentence, start, every):
@@ -43,7 +44,9 @@ def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out
     every_index = 1
     for src_file in src_files:
         try:
-            if not src_file in in_file_name_corpus_dict:
+            src_file_segments = src_file.split("/")
+            src_file_wo_path = src_file_segments[-1]
+            if not src_file_wo_path in in_file_name_corpus_dict:
                 continue
 
             if every_index == 1:
@@ -62,7 +65,7 @@ def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out
             else:
                 print("unknow OS")
 
-            sentence = in_file_name_corpus_dict.get(src_file)
+            sentence = in_file_name_corpus_dict.get(src_file_wo_path)
             output_file_name_corpus_dict[dest_file] = sentence
 
             every_index += 1
@@ -79,7 +82,11 @@ def change(src_folder, dest_folder, in_file_name_corpus_dict, out_file_list, out
 
     with open(out_file_name_sentence, 'w', encoding='utf-8') as write_file:
         for key in output_file_name_corpus_dict:
-            write_file.write(key + " " + output_file_name_corpus_dict[key] + "\n")
+            segments = jieba.cut(output_file_name_corpus_dict[key])
+            words_line = ""
+            for seg in segments:
+                words_line += " " + seg.replace(" ", "")
+            write_file.write(key + words_line + "\n")
 
 def read_file_corpus(in_file_name_sentence):
     file_name_corpus = {}
