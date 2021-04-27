@@ -3,9 +3,10 @@
 
 '''
 按照文件列表copy文件
-move_files.py D:\tmp\1\file_list.txt.train.txt D:\tmp\1 D:\tmp\train\
-move_files.py D:\tmp\1\file_list.txt.dev.txt D:\tmp\1 D:\tmp\dev\
-move_files.py D:\tmp\1\file_list.txt.test.txt D:\tmp\1 D:\tmp\test\
+python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.train.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/train
+python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.dev.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/dev
+python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.test.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/test
+
 '''
 
 import os
@@ -55,12 +56,46 @@ def move(file_list, src_folder, dest_folder):
 
     print("copied " + str(i) + " files done")
 
+def move_folder(file_list, dest_folder):
+    file_names = []
+    src_speaker_folders = []
+    with open(file_list, 'r', encoding='utf-8') as infile:
+        for line in infile:
+            new_line = line.replace('\n','')
+            file_names.append(new_line)
+            segments = new_line.split("/")
+            src_speaker = ""
+            for i in range(len(segments) - 1):
+                if segments[i] != "":
+                    src_speaker += "/" + segments[i]
+
+            src_speaker_folders.append(src_speaker)
+
+    i = 0
+    for src_speaker_folder in src_speaker_folders:
+            try:
+                i += 1
+                if platform.system() == 'Linux':
+                    os.system("cp -r " + src_speaker_folder + " " + dest_folder + "/")
+                elif platform.system() == 'Windows':
+                    segments = src_speaker_folder.split("\\")
+                    os.system("copy " + src_speaker_folder + " " + dest_folder + "\\" + segments[-1])
+                else:
+                    print("unknow OS")
+            except Exception as e:
+                print('copy fail: ' + src_speaker_folder)
+                print(e)
+
+    print("copied " + str(i) + " files done")
 
 if __name__=='__main__':
 
     if len(sys.argv) > 2:
-        file_list = sys.argv[1]
-        src_folder = sys.argv[2]
-        dest_folder = sys.argv[3]
-        move(file_list, src_folder, dest_folder)
+        # file_list = sys.argv[1]
+        # src_folder = sys.argv[2]
+        # dest_folder = sys.argv[3]
+        # move(file_list, src_folder, dest_folder)
 
+        file_list = sys.argv[1]
+        dest_folder = sys.argv[2]
+        move_folder(file_list, dest_folder)

@@ -52,23 +52,23 @@ change_file_name.py src_path dest_path 20200827.csv /tmp/wav_list.txt /tmp/aidat
 #        按比例把文件按比例分割         #
 #####################################
 例如把所有文件语料按照8:1:1（train:dev:test）的比例划分
-split_file.py D:\work\asr\dataset\from_wangzhongping\wav_list.txt 8 1 1
+split_file.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427 /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt 8 1 1
 生成:
 wav_list.txt.train.txt
 wav_list.txt.dev.txt
 wav_list.txt.test.txt
 
-D:\work\asr\dataset\from_wangzhongping\wav_list.txt:
-./CN-NORM-SC-20190119-F-27-00044073.wav
-./CN-NORM-SC-20191218-M-45-10007334.wav
-./CN-NORM-YU-20191218-F-19-10040410.wav
+/home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt:
+/home/forest/asr/dataset/from_wangzhongping/merge/changename/G9000/T0055G9000S0001.wav
+/home/forest/asr/dataset/from_wangzhongping/merge/changename/G9000/T0055G9000S0002.wav
+/home/forest/asr/dataset/from_wangzhongping/merge/changename/G9000/T0055G9000S0003.wav
+/home/forest/asr/dataset/from_wangzhongping/merge/changename/G9000/T0055G9000S0004.wav
+
 
 #####################################
-#        拷贝文件                    #
+#        拷贝文件(也可以手动copy)      #
 #####################################
-按照文件列表copy文件到指定目录
-move_files.py D:\tmp\1\file_list.txt.train.txt D:\tmp\1 D:\tmp\train\
-把D:\tmp\1中文件名出现在file_list.txt.train.txt中的文件copy到D:\tmp\train\
-
-move_files.py D:\tmp\1\file_list.txt.dev.txt D:\tmp\1 D:\tmp\dev\
-move_files.py D:\tmp\1\file_list.txt.test.txt D:\tmp\1 D:\tmp\test\
+按照文件列表copy文件
+python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.train.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/train
+python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.dev.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/dev
+python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.test.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/test
