@@ -6,7 +6,6 @@
 python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.train.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/train
 python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.dev.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/dev
 python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.test.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/test
-
 '''
 
 import os
@@ -69,7 +68,8 @@ def move_folder(file_list, dest_folder):
                 if segments[i] != "":
                     src_speaker += "/" + segments[i]
 
-            src_speaker_folders.append(src_speaker)
+            if not src_speaker in src_speaker_folders:
+                src_speaker_folders.append(src_speaker)
 
     i = 0
     for src_speaker_folder in src_speaker_folders:
@@ -77,6 +77,7 @@ def move_folder(file_list, dest_folder):
                 i += 1
                 if platform.system() == 'Linux':
                     os.system("cp -r " + src_speaker_folder + " " + dest_folder + "/")
+                    print("cp -r " + src_speaker_folder + " " + dest_folder)
                 elif platform.system() == 'Windows':
                     segments = src_speaker_folder.split("\\")
                     os.system("copy " + src_speaker_folder + " " + dest_folder + "\\" + segments[-1])
