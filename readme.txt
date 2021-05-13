@@ -82,3 +82,11 @@ python wav_2_pcm.py D:\\work\\asr\\dataset\\self_test_corpus\\test
 #把目录下*.pcm文件名改成其对应的text的名字#
 #####################################
 python rename_files.py D:\\work\\asr\\dataset\\self_test_corpus\\test D:\\work\\asr\\dataset\\self_test_corpus\\transcript\\aidatatang_200_zh_transcript.txt
+
+
+#####################################
+#重新生成aidatatang_200_zh_transcript.txt #
+#####################################
+根据最新的文件，重新生成aidatatang_200_zh_transcript.txt, 新文件名aidatatang_200_zh_transcript.txt.new.txt
+generate_file_name.py D:\\work\\asr\\dataset\\self_test_corpus\\test D:\\work\\asr\\dataset\\self_test_corpus\\transcript\\aidatatang_200_zh_transcript.txt
+python ~/asr/dataset/kaldi_corpus_util/generate_file_name.py ~/asr/dataset/aidatatang_200zh_self_test/aidatatang_200zh/corpus ~/asr/dataset/aidatatang_200zh_self_test/aidatatang_200zh/transcript/aidatatang_200_zh_transcript.txt

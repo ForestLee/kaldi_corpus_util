@@ -4,6 +4,7 @@
 '''
 根据最新的文件，重新生成aidatatang_200_zh_transcript.txt, 新文件名aidatatang_200_zh_transcript.txt.new.txt
 generate_file_name.py D:\\work\\asr\\dataset\\self_test_corpus\\test D:\\work\\asr\\dataset\\self_test_corpus\\transcript\\aidatatang_200_zh_transcript.txt
+python ~/asr/dataset/kaldi_corpus_util/generate_file_name.py ~/asr/dataset/aidatatang_200zh_self_test/aidatatang_200zh/corpus ~/asr/dataset/aidatatang_200zh_self_test/aidatatang_200zh/transcript/aidatatang_200_zh_transcript.txt
 '''
 
 from tqdm import tqdm
@@ -40,7 +41,7 @@ def gen_new_name_content_dict(root, transcript, ext=".wav"):
         try:
             src_file_name = os.path.splitext(src_file)[0]
             if platform.system() == 'Linux':
-                src_file_name_splits = src_file_name.split("\/")
+                src_file_name_splits = src_file_name.split("/")
             elif platform.system() == 'Windows':
                 src_file_name_splits = src_file_name.split("\\")
             else:
