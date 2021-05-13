@@ -72,3 +72,13 @@ wav_list.txt.test.txt
 python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.train.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/train
 python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.dev.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/dev
 python ~/asr/dataset/kaldi_corpus_util/move_files.py /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/wav_list.txt.test.txt /home/forest/asr/dataset/from_wangzhongping/merge/changename_0427/test
+
+#####################################
+#        把目录下*.wav转变成*.pcm      #
+#####################################
+python wav_2_pcm.py D:\\work\\asr\\dataset\\self_test_corpus\\test
+
+#####################################
+#把目录下*.pcm文件名改成其对应的text的名字#
+#####################################
+python rename_files.py D:\\work\\asr\\dataset\\self_test_corpus\\test D:\\work\\asr\\dataset\\self_test_corpus\\transcript\\aidatatang_200_zh_transcript.txt
