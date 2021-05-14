@@ -90,3 +90,9 @@ python rename_files.py D:\\work\\asr\\dataset\\self_test_corpus\\test D:\\work\\
 根据最新的文件，重新生成aidatatang_200_zh_transcript.txt, 新文件名aidatatang_200_zh_transcript.txt.new.txt
 generate_file_name.py D:\\work\\asr\\dataset\\self_test_corpus\\test D:\\work\\asr\\dataset\\self_test_corpus\\transcript\\aidatatang_200_zh_transcript.txt
 python ~/asr/dataset/kaldi_corpus_util/generate_file_name.py ~/asr/dataset/aidatatang_200zh_self_test/aidatatang_200zh/corpus ~/asr/dataset/aidatatang_200zh_self_test/aidatatang_200zh/transcript/aidatatang_200_zh_transcript.txt
+
+#####################################
+#        MAGICDATA                  #
+#####################################
+把MAGICDATA某个目录下TRANS.txt文件格式改成aidatatang_200_zh_transcript.txt对应格式
+generate_file_name_MAGICDATA.py Z:\\李林峰\\tmp\\TRANS.txt
